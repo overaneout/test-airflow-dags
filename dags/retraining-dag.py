@@ -3,8 +3,6 @@ from airflow.models.dag import DAG
 from datetime import datetime, timedelta
 from airflow.models import Variable
 
-from airflow.decorators import task
-
 
 
 haic_refresh_token = Variable.get("HAIC_REFRESH_TOKEN")
@@ -36,6 +34,8 @@ with DAG(
         import h2o_mlops as mlops
         import h2o_authn as authn
         print("testing task")
+        print(haic_refresh_token)
+        print(haic_domain)
         token_provider = authn.TokenProvider(
             refresh_token=haic_refresh_token,
             client_id="hac-platform-public", 
