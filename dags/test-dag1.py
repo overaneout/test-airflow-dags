@@ -34,6 +34,7 @@ with DAG(
 
         print(mlops.__version__)
         print(dai.__version__)
+        haic_domain = Variable.get("HAIC_DOMAIN")
         print(haic_domain)
         print("done")
     
