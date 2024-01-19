@@ -26,7 +26,7 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    def test_virtualenv_call():
+    def test_virtualenv_call(haic_refresh_token,haic_domain):
         """
         a dummy function to pip install files into python-venv
         
@@ -34,6 +34,8 @@ with DAG(
         import h2o_mlops as mlops
         import h2o_authn as authn
         print("testing task")
+        # haic_domain = kwargs.get("HAIC_DOMAIN")
+        # haic_refresh_token = kwargs.get("HAIC_REFRESH_TOKEN")
         print(haic_refresh_token)
         print(haic_domain)
         token_provider = authn.TokenProvider(
@@ -48,4 +50,9 @@ with DAG(
         print("mlops projects")
         print(mlops_client.projects.list())
     
-    virtualenv_task = PythonVirtualenvOperator(task_id="test-mlops-connection",python_callable=test_virtualenv_call,requirements=mlops_task_reqs, system_site_packages=False)
+    virtualenv_task = PythonVirtualenvOperator(task_id="test-mlops-connection",
+                                               python_callable=test_virtualenv_call,
+                                               requirements=mlops_task_reqs, 
+                                               system_site_packages=False,
+                                               op_args=[haic_refresh_token,haic_domain]
+                                               )

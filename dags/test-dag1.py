@@ -34,8 +34,6 @@ with DAG(
 
         print(mlops.__version__)
         print(dai.__version__)
-        haic_domain = Variable.get("HAIC_DOMAIN")
-        print(haic_domain)
         print("done")
     
     virtualenv_task = PythonVirtualenvOperator(task_id="test-virtualenv-python",python_callable=test_virtualenv_call,requirements=["driverlessai==1.10.6.2","h2o-mlops==0.62.1a5"], system_site_packages=False)
