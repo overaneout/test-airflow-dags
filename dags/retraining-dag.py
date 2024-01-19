@@ -47,4 +47,4 @@ with DAG(
         print("mlops projects")
         print(mlops_client.projects.list())
     
-    virtualenv_task = test_virtualenv_call
+    virtualenv_task = test_virtualenv_call()
