@@ -2,6 +2,7 @@ from airflow.operators.python import is_venv_installed, PythonVirtualenvOperator
 from airflow.models.dag import DAG
 from datetime import datetime, timedelta
 from airflow.models import Variable
+
 from airflow.decorators import task
 
 
@@ -27,7 +28,6 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    @task.virtualenv(task_id="test-virtualenv-python",requirements=mlops_task_reqs, system_site_packages=False)
     def test_virtualenv_call():
         """
         a dummy function to pip install files into python-venv
@@ -35,6 +35,7 @@ with DAG(
         """
         import h2o_mlops as mlops
         import h2o_authn as authn
+        print("testing task")
         token_provider = authn.TokenProvider(
             refresh_token=haic_refresh_token,
             client_id="hac-platform-public", 
@@ -47,4 +48,4 @@ with DAG(
         print("mlops projects")
         print(mlops_client.projects.list())
     
-    virtualenv_task = test_virtualenv_call()
+    virtualenv_task = PythonVirtualenvOperator(task_id="test-mlops-connection",python_callable=test_virtualenv_call,requirements=mlops_task_reqs, system_site_packages=False)
