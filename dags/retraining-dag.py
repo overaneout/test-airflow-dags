@@ -32,7 +32,7 @@ with DAG(
         a dummy function to pip install files into python-venv
         
         """
-        import h2o_mlops_client as mlops ## Legacy ui to do monitoring
+        import h2o_mlops as mlops ## Legacy ui to do monitoring
         import h2o_authn as authn
         import pytz
         # print(haic_refresh_token)
