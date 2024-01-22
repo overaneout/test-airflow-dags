@@ -8,7 +8,7 @@ from airflow.models import Variable
 haic_refresh_token = Variable.get("HAIC_REFRESH_TOKEN")
 haic_domain = Variable.get("HAIC_DOMAIN")
 deployment_id = Variable.get("TESTING_DEPLOYMENT_ID")
-mlops_task_reqs = ["h2o-mlops==0.62.1a5","h2o_authn==1.1.1","https://s3.amazonaws.com/artifacts.h2o.ai/releases/ai/h2o/mlops/rel-0.63.0/4/h2o_mlops_client-0.63.0-py2.py3-none-any.whl"]
+mlops_task_reqs = ["h2o-mlops==0.62.1a5","h2o_authn==1.1.1","pytz==2023.3"]
 # dai_task_reqs = ["driverlessai==1.10.6.2"]
 
 with DAG(
