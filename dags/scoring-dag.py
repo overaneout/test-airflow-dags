@@ -9,14 +9,6 @@ endpoint_url = Variable.get("HAIC_CC_MLOPS_ENDPOINT")
 checking_task_reqs = ["h2o_mlops_scoring_client==0.1.4b1"]
 scoring_task_reqs = ["h2o_mlops_scoring_client==0.1.4b1","s3fs~=2022.5.0"]
 
-
-# minio_endpoint = "minio.minio.svc.cluster.local:9000"
-# minio_bucket = "mlops-demo"
-# minio_access_key = "mlops-test-key"
-# minio_access_secret_key = Variable.get(minio_access_key)
-# minio_creds = (minio_access_key,minio_access_secret_key)
-# data_source = "credit_card_test.csv"
-# data_sink = "credit_card_output.csv"
 data_info = {
     "minio_endpoint": "http://minio.minio.svc.cluster.local:9000",
     "minio_access_key": "mlops-test-key",
@@ -68,7 +60,17 @@ with DAG(
                                             "endpoint_url": data_info.get("minio_endpoint")                                            
                                         }
                                     })
-        print(data_to_score)
+        output_df = h2o_mlops_scoring_client.score_data_frame(endpoint_url,id_column="ID",data_frame=data_to_score)
+        output_df.to_csv(data_info.get("data_sink"),
+                         storage_options={
+                                        "key": data_info.get("minio_access_key"),
+                                        "secret": data_info.get("minio_access_secret_key"),
+                                        "client_kwargs":{
+                                            "endpoint_url": data_info.get("minio_endpoint")                                            
+                                        }
+                        })
+        print(f"output saved to {data_info.get('data_sink')}")
+    
 
         
     model_endpoint_check_task = PythonVirtualenvOperator(task_id="endpoint_check",
