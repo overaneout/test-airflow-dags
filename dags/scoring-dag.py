@@ -37,7 +37,7 @@ with DAG(
         "retry_delay": timedelta(minutes=5),
     },
     description="testing dag",
-    schedule = None,         
+    schedule = "0 0 * * *",         
     start_date=datetime(2024,1,17),
     catchup=False,
 ) as dag:
