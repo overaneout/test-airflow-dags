@@ -14,7 +14,7 @@ data_info = {
     "minio_access_key": "mlops-test-key",
     "minio_access_secret_key": Variable.get("mlops-test-key"),
     "data_source": "s3://mlops-demo/mlops-source/credit_card_test.csv",
-    "data_sink": "s3://mlops-demo/mlops-source/credit_card_output.csv"
+    "data_sink": "s3://mlops-demo/mlops-sink/credit_card_output.csv"
 }
 
 
