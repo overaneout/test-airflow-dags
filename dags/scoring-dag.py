@@ -1,5 +1,4 @@
-from airflow.operators.python import PythonVirtualenvOperator,PythonOperator
-from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonVirtualenvOperator
 from airflow.models.dag import DAG
 from datetime import datetime, timedelta
 from airflow.models import Variable
@@ -86,4 +85,4 @@ with DAG(
                                                op_args=[endpoint_url,data_info]
                                                )
  
-model_endpoint_check_task >> model_scoring_task
+    model_endpoint_check_task >> model_scoring_task
