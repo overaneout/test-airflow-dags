@@ -18,7 +18,7 @@ scoring_task_reqs = ["h2o_mlops_scoring_client==0.1.4b1","s3fs~=2022.5.0"]
 # data_source = "credit_card_test.csv"
 # data_sink = "credit_card_output.csv"
 data_info = {
-    "minio_endpoint": "minio.minio.svc.cluster.local:9000",
+    "minio_endpoint": "http://minio.minio.svc.cluster.local:9000",
     "minio_access_key": "mlops-test-key",
     "minio_access_secret_key": Variable.get("mlops-test-key"),
     "data_source": "s3://mlops-demo/mlops-source/credit_card_test.csv",
