@@ -65,7 +65,7 @@ with DAG(
                                         "key": data_info.get("minio_access_key"),
                                         "secret": data_info.get("minio_access_secret_key"),
                                         "client_kwargs":{
-                                            endpoint_url: data_info.get("minio_endpoint")                                            
+                                            "endpoint_url": data_info.get("minio_endpoint")                                            
                                         }
                                     })
         print(data_to_score)
