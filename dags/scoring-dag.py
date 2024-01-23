@@ -25,8 +25,8 @@ with DAG(
         "email": ["airflow@example.com"],
         "email_on_failure": False,
         "email_on_retry": False,
-        "retries": 1,
-        "retry_delay": timedelta(minutes=5),
+        "retries": 3,
+        "retry_delay": timedelta(minutes=2),
     },
     description="testing dag",
     schedule = "0 0 * * *",         
@@ -60,7 +60,7 @@ with DAG(
                                             "endpoint_url": data_info.get("minio_endpoint")                                            
                                         }
                                     })
-        output_df = h2o_mlops_scoring_client.score_data_frame(endpoint_url,id_column="ID",data_frame=data_to_score)
+        output_df = h2o_mlops_scoring_client.score_data_frame(mlops_endpoint_url=endpoint_url,id_column="ID",data_frame=data_to_score)
         output_df.to_csv(data_info.get("data_sink"),
                          storage_options={
                                         "key": data_info.get("minio_access_key"),
