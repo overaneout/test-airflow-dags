@@ -79,6 +79,12 @@ with DAG(
 
     def model_retraining():
         print("placeholder function")
+        import h2o_authn as authn
+        import h2osteam
+        
+
+
+        pass
     
     drift_check_task = PythonVirtualenvOperator(task_id="check_drift",
                                                python_callable=check_mlops_drift,
@@ -94,7 +100,7 @@ with DAG(
                                                op_args=[haic_refresh_token,haic_domain],
                                                )
     
-    model_retraining = PythonVirtualenvOperator(task_id="model_retraining",
+    model_retraining_task = PythonVirtualenvOperator(task_id="model_retraining",
                                                python_callable=model_retraining,
                                                requirements=dai_task_reqs, 
                                                system_site_packages=False,
@@ -102,4 +108,4 @@ with DAG(
                                             #    op_args=[haic_refresh_token,haic_domain],
                                                )    
 
-    mlops_connection_test >> drift_check_task >> model_retraining
+    mlops_connection_test >> drift_check_task >> model_retraining_task
