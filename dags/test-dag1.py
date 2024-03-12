@@ -2,13 +2,6 @@ from airflow.operators.python import is_venv_installed, PythonVirtualenvOperator
 from airflow.models.dag import DAG
 from datetime import datetime, timedelta
 
-from airflow.models import Variable
-
-
-
-haic_refresh_token = Variable.get("HAIC_REFRESH_TOKEN")
-haic_domain = Variable.get("HAIC_DOMAIN")
-
 with DAG(
     "testing",
     default_args = {
